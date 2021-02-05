@@ -1,0 +1,131 @@
+body { overflow: hidden; }
+.navbar-offset { margin-top: 50px; }
+#map { position: absolute; top: 50px; bottom: 0px; left: 0px; right: 0px; }
+#map .ol-mouse-position { font-size: 1.2em; font-weight: bold;}
+.zoom-top-opened-sidebar { margin-top: 15px; }
+.zoom-top-collapsed { margin-top: 55px; }
+.zoomslider-top-opened-sidebar { margin-top: 20px; }
+.zoomslider-top-collapsed { margin-top: 60px; }
+.zoom-extent-top-opened-sidebar { margin-top: 230px; }
+.zoom-extent-top-collapsed { margin-top: 270px; }
+.overviewmap-bottom { margin-bottom: 35px; }
+.layer-opened-sidebar { margin-bottom: 35px; }
+.mini-submenu{
+    display:none;  
+    background-color: rgba(255, 255, 255, 0.46);
+    border: 1px solid rgba(0, 0, 0, 0.9);
+    border-radius: 4px;
+    padding: 9px;  
+    /*position: relative;*/
+    width: 42px;
+    text-align: center;
+}
+.mini-submenu-left {
+    font-size: 1.5em;
+    position: absolute;
+    top: 60px;
+    left: .5em;
+    z-index: 5;
+}
+.mini-submenu-right {
+    font-size: 1.5em;
+    position: absolute;
+    top: 60px;
+    right: .5em;
+    z-index: 5;
+}
+#map { z-index: 1; }
+.sidebar { z-index: 9; }
+.main-row { position: relative; top: 0; }
+.mini-submenu:hover{
+    cursor: pointer;
+}
+.slide-submenu{
+    background: rgba(0, 0, 0, 0.45);
+    display: inline-block;
+    padding: 0 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+select {
+    border: 1px solid #d6d8db;
+    border-radius: 4px;
+    background-color: #ecedee;
+    text-transform: uppercase;
+    color: #47515c;
+    padding: 12px 10px 12px 10px;
+    width: auto;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+select > option {
+    padding: 5px 0px;
+}
+.customSelect {
+    border: 1px solid #d6d8db;
+    border-radius: 4px;
+    background-color: #ecedee;
+    color: #47515c;
+    padding: 12px 10px 12px 10px;
+    margin-bottom: 10px;
+}
+.customSelect.changed {
+    background-color: #f0dea4;
+}   
+.customSelectInner {
+    background:url(../images/select_arrows.png) no-repeat center right;
+}
+.info {
+    font-size: 15px;
+    font-weight: bold;
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+    z-index: 15;
+    background: rgba(255, 255, 255, 0.5);
+}
+.podesavanja {
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 250%;
+}
+
+.legenda {
+    font-size: 15px;
+    font-weight: bold;
+    z-index: 15;
+    background-color: #ffffff;
+    margin-left: 20px;
+}
+
+.legenda2 {
+    font-family: Arial Narrow,Arial,sans-serif; 
+    font-size: 13px;
+}
+.druga {
+    font-size: 20px;
+    font-weight: bold;
+    text-align:center
+}
+#desno {
+    position: relative;
+    float: right;
+    text-align: center;
+    margin: 0 1% 0 1%; 
+}
+#levo {
+    position: relative;
+    float: left;
+    text-align: center;
+    margin: 0 1% 0 1%;
+}
+
+#offnet {
+    margin: 0 auto 0 auto;
+    text-align: center;
+}
+
+.scroll {
+    overflow: auto;
+}

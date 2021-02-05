@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <title>WEB portal - Erozija</title>
+        <link rel="stylesheet" href="https://openlayers.org/en/v3.20.1/css/ol.css" type="text/css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
+        <link rel="stylesheet" type="text/css" href="MM-stil.css" />
+        <link rel="stylesheet" href="MMol3-layerswitcher.css" />
+        <link rel="stylesheet" href="MM-popup.css" />
+        <script type="text/javascript" src="https://openlayers.org/en/v3.20.1/build/ol.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB0eH331NiHkOolgPD7wawd5fgxvhBp1i0"></script>
+    </head>
+    <body>
+        <div class="container">
+            <nav class="navbar navbar-fixed-top navbar-default" role="navigation">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="MM-Erozija.html">Interaktivna WEB karta</a>
+                        <ul class="nav navbar-nav">
+                            <li><a href="MM-Erozija-Rezultati.html">Grafici i rezultati</a></li>
+                        </ul>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Help <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="https://openlayers.org/en/latest/examples/">OpenLayers3 - Primeri</a></li>
+                                    <li><a href="http://openlayersbook.github.io/index.html">OpenLayers3 - Uputstvo</a></li>
+                                    <li><a href="https://www.w3schools.com/icons/fontawesome_icons_webapp.asp">FontAwesome stilovi</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+            <div id="info" class="info">&nbsp;</div>
+            <div id="map">
+            </div>
+            <div id="popup" class="ol-popup">
+                <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+                <div id="popup-content"></div>
+            </div>
+        </div>
+        <nav>
+            <div class="navbar-offset"></div>
+
+            <div class="row main-row">
+                <div class="col-sm-4 col-md-3 sidebar sidebar-left pull-left">
+                    <div class="panel-group sidebar-body" id="accordion-left">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" href="#layers">
+                                        <i class="fa fa-globe"></i>
+                                        Legenda
+                                    </a>
+                                    <span class="pull-right slide-submenu">
+                                        <i class="fa fa-chevron-left"></i>
+                                    </span>
+                                </h4>
+                            </div>
+                            <div id="layers" class="panel-collapse collapse in">
+                                <div class="panel-body list-group">
+                                    <div class="legenda">Legenda lejera za eroziju tla:<br>
+                                        <img src="http://localhost:8080/geoserver/Mirko/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=Mirko:stanice&STYLE=stanice">
+                                        <br>
+                                        <img src="http://localhost:8080/geoserver/Mirko/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=Mirko:erozija&STYLE=erozija">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" href="#properties">
+                                        <i class="fa fa-crosshairs"></i>
+                                        Lokacija
+                                    </a>                     
+                                </h4>
+                            </div>
+                            <div id="properties" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <div class="col-xs-8">
+                                        <div>
+                                            <label for="adresa">Adresa:</label>
+                                            <input type="text" id="adresa" value="Kosovska, Beograd">
+                                        </div>
+                                        <div>
+                                            <button onclick="GetLocation()"><i class="fa fa-search-plus"></i></button>
+                                        </div>
+                                        <br>
+                                        <div>
+                                            <label for="lat">φ - geografska širina:</label>
+                                            <input type="text" id="lat" value="0.00">
+                                        </div>
+                                        <div>
+                                            <label for="lon">λ - geografska dužina:</label>
+                                            <input type="text" id="lon" value="0.00">
+                                        </div>
+                                        <div>
+                                            <button onclick="lonlat()"><i class="fa fa-search-plus"></i></button>
+                                        </div>
+                                        <br>
+                                        <div>
+                                            <label for="level">Zoom level:</label>
+                                            <input type="text" id="level" value="5" size="6">
+                                        </div>
+                                        <div>
+                                            <button onclick="setLevel()">Podesi</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-6 mid"></div>
+                <div class="col-sm-4 col-md-3 sidebar sidebar-right pull-right">
+                    <div class="panel-group sidebar-body" id="accordion-right">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" href="#taskpane">
+                                        <i class="fa fa-cog"></i>
+                                        Podešavanja
+                                    </a>
+                                    <span class="pull-right slide-submenu">
+                                        <i class="fa fa-chevron-right"></i>
+                                    </span>
+                                </h4>
+                            </div>
+                            <div id="taskpane" class="podesavanja">
+                                <div class="panel-body">
+                                    <div id="layertree" class="panel-collapse collapse in">
+                                        <ul>
+                                            <li><span>Podloga</span>
+                                                <fieldset id="layer0">
+                                                    <label class="checkbox" for="visible0">
+                                                        <input id="visible0" class="visible" type="checkbox"/>visibility
+                                                    </label>
+                                                    <label>opacity</label>
+                                                    <input class="opacity" type="range" min="0" max="1" step="0.01"/>
+                                                </fieldset>
+                                            </li>
+                                            <li><span>Lejeri</span>
+                                                <fieldset id="layer1">
+                                                    <label class="checkbox" for="visible1">
+                                                        <input id="visible1" class="visible" type="checkbox"/>visibility
+                                                    </label>
+                                                    <label>opacity</label>
+                                                    <input class="opacity" type="range" min="0" max="1" step="0.01"/>
+                                                </fieldset>
+                                                <ul>
+                                                    <li><span>Stanice (Geoserver)</span>
+                                                        <fieldset id="layer11">
+                                                            <label class="checkbox" for="visible11">
+                                                                <input id="visible11" class="visible" type="checkbox"/>visibility
+                                                            </label>
+                                                            <label>opacity</label>
+                                                            <input class="opacity" type="range" min="0" max="1" step="0.01"/>
+                                                        </fieldset>
+                                                    </li>
+                                                    <li><span>Erozija (Geoserver)</span>
+                                                        <fieldset id="layer10">
+                                                            <label class="checkbox" for="visible10">
+                                                                <input id="visible10" class="visible" type="checkbox"/>visibility
+                                                            </label>
+                                                            <label>opacity</label>
+                                                            <input class="opacity" type="range" min="0" max="1" step="0.01"/>
+                                                        </fieldset>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div> 
+                                </div>                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mini-submenu mini-submenu-left pull-left">
+                <i class="fa fa-globe"></i>
+            </div>
+            <div class="mini-submenu mini-submenu-right pull-right">
+                <i class="fa fa-cog"></i>
+            </div>
+        </nav>
+        <script src="MM-jsp.js"></script>
+        <script src="MMol3-layerswitcher.js"></script>
+        <script src="MM-layerswitcher.js"></script>
+        <script src="MM-search.js"></script>
+    </body>
+</html>
